@@ -1,50 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-bool prime[20000010];
-long tprime[20000010];
+const int sz = 20000000 + 5;
+bool visit[sz+5];
+vector<int>v;
+vector<pair<int,int> >ans;
 
-void sieve()
+void seive()
 {
-    prime[1]=false;
-    int n=sqrt(20000010);
+    memset(visit,false,sizeof(visit));
+    visit[0] = visit[1] = 1;
 
-    for(int i=3; i<=n; i++)
+    v.push_back(2);
+
+    for(int i=3; i<=sz; i+=2)
     {
-        if(prime[i]!=false)
-        {
-            for(int j=2*i; j<=20000010; j=j+i)
-            {
-                prime[j]=false;
-            }
-        }
+        if(visit[i])
+            continue;
+        v.push_back(i);
+
+        for(int j=i; j<=sz; j+=2*i)
+            visit[j] = 1;
+
     }
-}
 
-void twin_prime()
-{
-    int j=1;
-
-    for(int i=3; i<=20000000; i++)
+    for(int i=1; i<v.size(); i++)
     {
-        if(prime[i] && prime[i+2])
-        {
-            tprime[j++]=i;
-        }
+        if(v[i]-v[i-1] == 2)
+            ans.push_back({v[i-1],v[i]});
     }
 }
 
 int main()
 {
-    memset(prime,true,sizeof(prime));
-    sieve();
-    twin_prime();
-
+    seive();
     int n;
-
     while(cin>>n)
     {
-        cout<<"("<<tprime[n]<<", "<<tprime[n]+2<<")"<<endl;
+        n--;
+        cout<<"("<<ans[n].first<<", "<<ans[n].second<<")"<<endl;
     }
 
     return 0;

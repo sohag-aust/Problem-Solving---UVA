@@ -1,21 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define pi acos(-1)
-int main(void)
+
+const double PI = acos(-1);
+
+int main()
 {
     int test;
     cin>>test;
+
     while(test--)
     {
-        double len;
-        cin>>len;
-        double wid=(6*len)/10;
-        double r=len/5;
-        double res=len*wid;
-        double red=pi*r*r;
-        double green=res-red;
-        printf("%.2lf %.2lf\n",red,green);
+        double length;
+        cin>>length;
+
+        double width = ((length)*6.0)/10.0;
+        double radius = length/5.0;
+
+        double circle_area = PI * radius * radius;
+        double rectangle_area = (length * width) - circle_area;
+
+        cout<<setprecision(2)<<fixed<<circle_area;
+        cout<<" "<<setprecision(2)<<fixed<<rectangle_area<<endl;
     }
+
     return 0;
 }
-

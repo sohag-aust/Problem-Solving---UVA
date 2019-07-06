@@ -1,31 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main(void)
+
+int main()
 {
-    int t,a,b,c,ar[10000];
-    cin>>t;
-    int k=0;
-    while(t--)
+    int test,cs=0;
+    cin>>test;
+
+    while(test--)
     {
-        int cnt=0;
-        int sum=0;
-        int sum1=0;
-        cin>>a>>b>>c;
-        for(int i=0; i<a; i++)
-            cin>>ar[i];
-        sort(ar,ar+a);
-        for(int i=0; i<a; i++)
+        int n,p,q;
+        cin>>n>>p>>q;
+
+        multiset<int>st;
+        while(n--)
         {
-            sum1+=ar[i];
-            if(sum1<=c)
-            {
-                cnt++;
-                if(cnt<=b)
-                    sum++;
-            }
+            int grm;
+            cin>>grm;
+            st.insert(grm);
         }
-        cout<<"Case "<<++k<<": "<<sum<<endl;
+
+        auto it = st.begin();
+        int cnt = 0, sum = 0;
+
+        while(it!=st.end() && cnt < p)
+        {
+            sum += *it;
+            if(sum <= q)
+                cnt++;
+            else break;
+
+            it++;
+        }
+
+        cout<<"Case "<<++cs<<": "<<cnt<<endl;
     }
+
     return 0;
 }
-

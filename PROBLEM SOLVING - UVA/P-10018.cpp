@@ -1,53 +1,72 @@
 #include<bits/stdc++.h>
-typedef long long ll;
 using namespace std;
+
+typedef long long ll;
+
+map<ll,ll>mp;
+
+void init()
+{
+    mp[1] = 1, mp[2] = 10, mp[3] = 100, mp[4] = 1000, mp[5] = 10000, mp[6] = 100000, mp[7] = 1000000, mp[8] = 10000000;
+    mp[9] = 100000000, mp[10] = 1000000000, mp[11] = 10000000000, mp[12] = 100000000000, mp[13] = 1000000000000;
+    mp[14] = 10000000000000;
+}
+
+bool isPalindrome(string st)
+{
+    for(int i=0,j=st.size()-1; i<(st.size())/2; i++,j--)
+    {
+        if(st[i]!=st[j])
+            return false;
+    }
+    return true;
+}
 
 int main()
 {
-    ll test,num,temp,rem,rev,cnt,flag;
-    ll rem1,rev1,sum,t;
-
+    init();
+    int test;
     cin>>test;
 
     while(test--)
     {
+        ll num;
         cin>>num;
+        int cnt = 0;
 
-        cnt=0;
-        temp=num;
-        flag=num;
-
-        while(1)
+        while(cnt<1001)
         {
-            rev1=rev=0;
+            ++cnt;
+            ostringstream str1;
 
-            while(temp>0)
+            str1<<num;
+            string st = str1.str();
+            int sz = st.size();
+
+            ll num1 = num;
+            ll num2 = 0;
+            while(num1!=0)
             {
-                rem=temp%10;
-                rev=(rev*10)+rem;
-                temp/=10;
+                int div = num1%10;
+                num2+=div*mp[sz];
+                --sz;
+                num1/=10;
             }
 
-            cnt++;
-            sum=rev+flag;
-            t=sum;
+            ll sum = num+num2;
+            ostringstream str2;
+            str2<<sum;
+            st = str2.str();
 
-            while(t>0)
+            if(isPalindrome(st))
             {
-                rem1=t%10;
-                rev1=(rev1*10)+rem1;
-                t/=10;
-            }
-
-            if(sum==rev1)
+                cout<<cnt<<" "<<st<<endl;
                 break;
+            }
 
-            temp=sum;
-            flag=temp;
-
+            stringstream val(st);
+            val>>num;
         }
-
-        cout<<cnt<<" "<<sum<<endl;
     }
 
     return 0;
