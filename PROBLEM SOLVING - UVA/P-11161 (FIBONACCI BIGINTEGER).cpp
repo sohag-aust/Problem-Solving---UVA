@@ -13,7 +13,6 @@ public class Main
         BigInteger temp = BigInteger.valueOf(1);
 
         Map<BigInteger, String> mp = new HashMap<>();
-        StringBuffer sb = new StringBuffer("");
 
         BigInteger cnt = BigInteger.valueOf(2);
 
@@ -50,12 +49,12 @@ public class Main
             if(n.compareTo(BigInteger.ZERO) == 0)
                 break;
 
-            sb.append("Set ").append(i).append(":\n");
+            System.out.println("Set "+i+":");
 
             if(n.compareTo(BigInteger.valueOf(1)) == 0)
-                sb.append(0).append("\n");
+                System.out.println(0);
             else if(n.compareTo(BigInteger.valueOf(2)) == 0)
-                sb.append(1).append("\n");
+                System.out.println(1);
 
             else
             {
@@ -79,13 +78,10 @@ public class Main
                 c = c.add(BigInteger.ONE);
                 sum = sum.divide(c);
 
-                sb.append(sum).append("\n");
+                System.out.println(sum);
             }
 
             i++;
         }
-
-        System.out.print(sb);
     }
 }
-
